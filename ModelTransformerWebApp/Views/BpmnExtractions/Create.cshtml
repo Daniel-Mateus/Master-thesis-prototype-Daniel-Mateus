@@ -1,0 +1,38 @@
+﻿@model ModelTransformerWebApp.Models.BpmnExtraction
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+
+</style>
+
+<h1>New Business Process Model Extraction</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="UploadFile" class="form-label">Search for file...</label>
+                <input required asp-for="UploadFile" type="file" accept=".xml,.bpmn" class="form-control">
+                <span asp-validation-for="UploadFile" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

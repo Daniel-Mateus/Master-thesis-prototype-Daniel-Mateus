@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ModelTransformerWebApp.Models.BpmnExtraction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .extractionOptions:hover{
+        cursor:pointer;
+        background-color:lightgray;
+    }
+</style>
+
+<h1>Extractions</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Start New Extraction</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtractionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nodes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patterns)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserStoriesResult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScenarioResult)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FilePath)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExtractionDate)
+                </td>
+                <td>
+                    @foreach (Node node in item.Nodes)
+                    {
+                        var separetedNode = node.Type + ": " + node.Name + "\n";
+                        <p>@separetedNode</p>
+                        <hr />
+                    }
+                </td>
+                <td>
+                    @foreach (Pattern pattern in item.Patterns)
+                    {
+@*                        var separetedNode = "Pattern"+ "\n" + "NodeTypes: " + pattern.NodeTypes + "\nUser story template: " + pattern.USTemplate + "\n";
+                        <p>@separetedNode</p>*@
+                        var separetedPattern = "Pattern";
+                        <p>@separetedPattern</p>
+                        var separetedPatternTypes = "NodeTypes: " + pattern.NodeTypes + "\n";
+                        <p>@separetedPatternTypes</p>
+                        var separetedPatternUS = "User story template: " + pattern.USTemplate + "\n";
+                        <p>@separetedPatternUS</p>
+                        <hr />
+
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.UserStoriesResult))
+                    {
+                        @foreach (string us in item.UserStoriesResult.Split(";"))
+                        {
+                            if (!String.IsNullOrEmpty(us))
+                            {
+                                var separetedUS = us + "\n";
+                                <p>@separetedUS</p>
+                                <hr />
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    @if (!String.IsNullOrEmpty(item.ScenarioResult))
+                        {
+                        @foreach (string us in item.ScenarioResult.Split(";"))
+                            {
+                                if (!String.IsNullOrEmpty(us))
+                                {
+                                    var separetedUS = us + "\n";
+                                <p style="white-space: pre-line">@separetedUS</p>
+                                <hr />
+                                }
+                            }
+                        }
+                    </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FilePath)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="extractionOptions">Details</a> |<br>
+                    <a asp-action="DownloadFile" asp-route-id="@item.Id" asp-route-isUS="@true" class="extractionOptions">Download User Stories</a> |<br>
+                    <a asp-action="DownloadFile" asp-route-id="@item.Id" asp-route-isUS="@false" class="extractionOptions">Download Scenarios</a><br>
+                    @*<a asp-action="Delete" asp-route-id="@item.Id" class="extractionOptions">Delete</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

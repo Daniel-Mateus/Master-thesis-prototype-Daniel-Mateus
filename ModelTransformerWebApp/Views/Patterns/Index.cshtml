@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ModelTransformerWebApp.Models.Pattern>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Patterns</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Pattern</a>
+</p>
+
+@if (!ViewBag.gotPatterns)
+{
+    <form method="post" asp-controller="Patterns" asp-action="AddDefaultPatterns">
+        <div class="form-group">
+            <input type="submit" value="Add Default Patterns" class="btn btn-primary" />
+        </div>
+    </form>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NodeTypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSameLane)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSameProcess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.USTemplate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NodeTypes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSameLane)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsSameProcess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.USTemplate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,42 @@
+﻿@model ModelTransformerWebApp.Models.BpmnExtraction
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>BpmnExtraction</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ExtractionDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ExtractionDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserStoriesResult)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserStoriesResult)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScenarioResult)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScenarioResult)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FilePath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FilePath)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
